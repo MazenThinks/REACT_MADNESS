@@ -1,13 +1,12 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 function ListGroup() {
   let items = ["New York", "San Francisco", "London", "Paris", "Tokyo"];
 
-  //items = [];
+  // hook
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
-  const Zeroitems = () => {
-    return items.length === 0 ? <p>No item found</p> : null;
-  };
+  //items = [];
 
   return (
     <>
@@ -16,11 +15,17 @@ function ListGroup() {
         <p>No item found</p>
       ) : (
         <ul className="list-group">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <li
-              className="list-group-item"
+              className={
+                selectedIndex === index
+                  ? "list-group-item active"
+                  : "list-group-item"
+              }
               key={item}
-              onClick={(event) => console.log(event)}
+              onClick={() => {
+                setSelectedIndex(index);
+              }}
             >
               {item}
             </li>
